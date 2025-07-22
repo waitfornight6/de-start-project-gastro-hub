@@ -8,7 +8,7 @@ r.menu
 FROM 
 cafe.restaurants r
 WHERE 
-r.menu::text LIKE '%капучино%'
+r.menu::text LIKE '%апучино%'
 FOR UPDATE OF r
 ),
 updated_menu AS (
@@ -16,8 +16,8 @@ SELECT
 restaurant_uuid,
 jsonb_set(
 menu,
-'{Напитки,капучино,цена}',
-jsonb_build_object('value', ROUND((menu->'Напитки'->'капучино'->>'цена')::numeric * 1.2, 2))->'value'
+'{Кофе,Капучино}',
+jsonb_build_object('value', ROUND((menu->'Кофе'->>'Капучино')::numeric * 1.2, 2))->'value'
 ) AS new_menu
 FROM 
 cafes_with_cappuccino
